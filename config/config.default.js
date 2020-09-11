@@ -37,7 +37,7 @@ module.exports = appInfo => {
     // database configuration
     client: {
       // host
-      host: mysql,
+      host: 'mysql',
       // port
       port: '3306',
       // username
