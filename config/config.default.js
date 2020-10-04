@@ -64,6 +64,8 @@ module.exports = appInfo => {
       'http://localhost:3001',
       'http://127.0.0.1:3000',
       'http://127.0.0.1:3001',
+      'https://admin.mynetdisk.top/',
+      'https://blog.mynetdisk.top/',
     ],
   }
 
