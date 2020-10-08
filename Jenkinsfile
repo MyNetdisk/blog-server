@@ -7,6 +7,9 @@ node {
         stage('pull the code') {
             checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
         }
+        stage('构建dockerfile镜像'){
+            sh "mvn dockerfile:build"
+        }
     }catch(e){
         throw e
     }finally{
