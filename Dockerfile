@@ -30,4 +30,4 @@ COPY . /var/www/service
 # 暴露容器端口
 EXPOSE 7001
 
-ENTRYPOINT ["sh", "./docker/docker.sh"]
+ENTRYPOINT ["sh", "./docker.sh"]
