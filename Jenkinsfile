@@ -6,8 +6,8 @@ def git_url = "git@github.com:MyNetdisk/blog-server.git"
 def tag = "latest"
 //阿里云镜像地址
 def aliyun_url = "registry.cn-qingdao.aliyuncs.com/mynetdisk"
-//镜像库项目名称
-def aliyun_project = "blogs"
+//阿里云登录凭证id
+def aliyun_auth = "33374deb-5ae1-4278-97a5-8a8a93d5f269"
 
 node {
     try{
@@ -19,7 +19,16 @@ node {
             //定义镜像名称
             def imageName = "${project_name}:${tag}"
             //对镜像打上标签
-            sh "docker tag ${imageName} ${aliyun_url}/${aliyun_project}/${imageName}"
+            sh "docker tag ${imageName} ${aliyun_url}/${imageName}"
+            //把镜像推送到阿里云
+            withCredentials([usernamePassword(credentialsId: "${aliyun_auth}", passwordVariable: 'password', usernameVariable: 'username')]) {
+               //登录
+               sh "docker login -u ${username} -p ${password} ${aliyun_url}"
+               //上传
+               sh "docker push ${aliyun_url}/${imageName}"
+               
+               sh "echo 镜像上传成功"
+            }
         }
     }catch(e){
         throw e
