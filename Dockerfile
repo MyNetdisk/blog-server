@@ -8,7 +8,7 @@ RUN apk --update add tzdata \
     && apk del tzdata
 
 # 设置数据库密码
-ENV MYSQL_ROOT_PASSWORD="123456"
+ENV MYSQL_ROOT_PASSWORD="88888888"
 
 # 这是容器中的目录地址
 RUN mkdir -p /var/www/service
