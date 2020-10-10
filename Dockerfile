@@ -7,6 +7,9 @@ RUN apk --update add tzdata \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
 
+# 设置数据库密码
+ENV MYSQL_ROOT_PASSWORD="123456"
+
 # 这是容器中的目录地址
 RUN mkdir -p /var/www/service
 
