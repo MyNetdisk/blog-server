@@ -7,6 +7,8 @@ RUN apk --update add tzdata \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
 
+# 设置数据库主机名
+ENV MYSQL_ROOT_HOST="mysql"
 # 设置数据库密码
 ENV MYSQL_ROOT_PASSWORD="123456"
 
