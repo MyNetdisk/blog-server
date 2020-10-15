@@ -8,7 +8,7 @@ RUN apk --update add tzdata \
     && apk del tzdata
 
 # 设置数据库主机名
-ENV MYSQL_ROOT_HOST="mysql"
+ENV MYSQL_ROOT_HOST="localhost"
 # 设置数据库密码
 ENV MYSQL_ROOT_PASSWORD="123456"
 
