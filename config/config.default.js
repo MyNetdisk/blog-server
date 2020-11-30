@@ -58,8 +58,8 @@ module.exports = appInfo => {
       enable: false,
     },
     domainWhiteList: [
-      'http://47.105.40.202:3000',
-      'http://47.105.40.202:3001',
+      'http://42.192.9.123:3000',
+      'http://42.192.9.123:3001',
       'http://localhost:3000',
       'http://localhost:3001',
       'http://127.0.0.1:3000',
