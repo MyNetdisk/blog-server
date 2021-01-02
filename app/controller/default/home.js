@@ -65,7 +65,11 @@ class HomeController extends Controller {
     console.log(id)
     const sql = `SELECT comment.id as id,comment.content as content,comment.article_id as article_id,comment.comment_id as comment_id FROM comment WHERE article_id=${id}`
     const res = await this.app.mysql.query(sql)
-    console.log(res)
+    // console.log(res)
+    const subComment = res.filter(function (elem) {
+      return elem.comment_id != null
+    })
+    console.log(subComment)
     this.ctx.body = {data: res}
   }
 }
