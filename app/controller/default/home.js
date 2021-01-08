@@ -73,7 +73,9 @@ class HomeController extends Controller {
         return elem.comment_id != null && element.id === elem.comment_id
       })
       if (subComment.length !== 0) {
-        element.subCom.push(subComment)
+        subComment.forEach(function (ele) {
+          element.subCom.push(ele)
+        })
       }
     })
     this.ctx.body = {data: mainCom}
