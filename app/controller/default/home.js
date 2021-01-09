@@ -62,7 +62,7 @@ class HomeController extends Controller {
   // 根据文章ID获得文章评论列表
   async getCommentById() {
     const id = this.ctx.params.id
-    const sql = `SELECT comment.id as id,comment.content as content,comment.article_id as article_id,comment.comment_id as comment_id FROM comment WHERE article_id=${id}`
+    const sql = `SELECT comment.id as id,comment.content as content,comment.article_id as article_id,comment.comment_id as comment_id,comment.from_avatar as comment_avatar,comment.from_name,comment.create_date as comment_date FROM comment WHERE article_id=${id}`
     const res = await this.app.mysql.query(sql)
     const mainCom = res.filter(function (elem) {
       return elem.comment_id === null
