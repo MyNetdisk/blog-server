@@ -80,9 +80,17 @@ class HomeController extends Controller {
     })
     this.ctx.body = {data: mainCom}
   }
-  // 根据文章ID添加文章评论
-  // 根据文章ID添加文章评论
-  // 根据文章ID添加文章评论
+  // 添加文章评论
+  async addComment(){
+    const tmpComment = this.ctx.request.body
+    const res = await this.app.mysql.insert('comment', tmpComment)
+    const insertSuccess = res.affectedRows === 1
+    const insertId = res.insertId
+    this.ctx.body = {
+      isSuccess: insertSuccess,
+      insertId,
+    }
+  }
 }
 
 module.exports = HomeController
