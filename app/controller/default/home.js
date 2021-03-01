@@ -81,7 +81,6 @@ class HomeController extends Controller {
     this.ctx.body = {data: mainCom}
   }
   // 添加文章评论
-  // 添加文章评论
   async addComment(){
     const tmpComment = this.ctx.request.body
     const res = await this.app.mysql.insert('comment', tmpComment)
