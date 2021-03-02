@@ -8,4 +8,5 @@ module.exports = app => {
   router.get('/default/getTypeInfo', controller.default.home.getTypeInfo)
   router.get('/default/getListById/:id', controller.default.home.getListById)
   router.get('/default/getCommentById/:id', controller.default.home.getCommentById)
+  router.post('/default/addComment', controller.default.home.addComment)
 }
