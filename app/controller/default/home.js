@@ -64,6 +64,7 @@ class HomeController extends Controller {
     const id = this.ctx.params.id
     const sql = `SELECT comment.id as id,comment.content as content,comment.article_id as article_id,comment.comment_id as comment_id,comment.from_avatar as comment_avatar,comment.from_name,comment.create_date as comment_date FROM comment WHERE article_id=${id}`
     const res = await this.app.mysql.query(sql)
+    const comtotal = res.length
     const mainCom = res.filter(function (elem) {
       return elem.comment_id === null
     })
@@ -78,10 +79,13 @@ class HomeController extends Controller {
         })
       }
     })
-    this.ctx.body = {data: mainCom}
+    this.ctx.body = {
+      data: mainCom,
+      comtotal,
+    }
   }
   // 添加文章评论
-  async addComment(){
+  async addComment() {
     const tmpComment = this.ctx.request.body
     const res = await this.app.mysql.insert('comment', tmpComment)
     const insertSuccess = res.affectedRows === 1
