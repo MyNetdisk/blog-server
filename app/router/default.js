@@ -9,4 +9,6 @@ module.exports = app => {
   router.get('/default/getListById/:id', controller.default.home.getListById)
   router.get('/default/getCommentById/:id', controller.default.home.getCommentById)
   router.post('/default/addComment', controller.default.home.addComment)
+  router.post('/default/isRegister', controller.default.home.isRegister)
+  router.post('/default/register', controller.default.home.register)
 }

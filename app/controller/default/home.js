@@ -95,6 +95,24 @@ class HomeController extends Controller {
       insertId,
     }
   }
+  // 添加是否注册接口
+  async isRegister() {
+    const username = this.ctx.request.body.username
+    const sql = "SELECT username FROM user WHERE username = '" + username + "'"
+    console.log(username)
+    const res = await this.app.mysql.query(sql)
+    if (res.length > 0) {
+      this.ctx.body = true
+    } else {
+      this.ctx.body = false
+    }
+  }
+  // 添加注册接口
+  async register() {
+    const tmpRegister = this.ctx.request.body
+    console.log(tmpRegister)
+    this.ctx.body = '注册成功'
+  }
 }
 
 module.exports = HomeController
