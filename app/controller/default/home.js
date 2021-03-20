@@ -97,7 +97,7 @@ class HomeController extends Controller {
   }
   // 添加是否注册接口
   async isRegister() {
-    const username = this.ctx.request.body.username
+    const username = this.ctx.params.username
     const sql = "SELECT username FROM user WHERE username = '" + username + "'"
     console.log(username)
     const res = await this.app.mysql.query(sql)
