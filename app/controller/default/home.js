@@ -111,7 +111,13 @@ class HomeController extends Controller {
   async register() {
     const tmpRegister = this.ctx.request.body
     console.log(tmpRegister)
-    this.ctx.body = '注册成功'
+    const res = await this.app.mysql.insert('user', tmpRegister)
+    const insertSuccess = res.affectedRows === 1
+    const insertId = res.insertId
+    this.ctx.body = {
+      isSuccess: insertSuccess,
+      insertId,
+    }
   }
 }
 
