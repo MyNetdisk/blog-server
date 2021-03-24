@@ -99,8 +99,8 @@ class HomeController extends Controller {
   async isRegister() {
     const username = this.ctx.params.username
     const sql = "SELECT username FROM user WHERE username = '" + username + "'"
-    console.log(username)
     const res = await this.app.mysql.query(sql)
+    console.log(res)
     if (res.length > 0) {
       this.ctx.body = true
     } else {
