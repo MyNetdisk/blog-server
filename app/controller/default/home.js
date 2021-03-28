@@ -98,9 +98,8 @@ class HomeController extends Controller {
   // 添加是否注册接口
   async isRegister() {
     const username = this.ctx.params.username
-    const sql = "SELECT username FROM user WHERE username = '" + username + "'"
+    const sql = `SELECT username FROM user WHERE username = '${username}'`
     const res = await this.app.mysql.query(sql)
-    console.log(res)
     if (res.length > 0) {
       this.ctx.body = true
     } else {
@@ -110,7 +109,6 @@ class HomeController extends Controller {
   // 添加注册接口
   async register() {
     const tmpRegister = this.ctx.request.body
-    console.log(tmpRegister)
     const res = await this.app.mysql.insert('user', tmpRegister)
     const insertSuccess = res.affectedRows === 1
     const insertId = res.insertId
@@ -118,6 +116,10 @@ class HomeController extends Controller {
       isSuccess: insertSuccess,
       insertId,
     }
+  }
+  // 添加登录接口
+  async login() {
+    
   }
 }
 
