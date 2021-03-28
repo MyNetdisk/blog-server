@@ -119,7 +119,16 @@ class HomeController extends Controller {
   }
   // 添加登录接口
   async login() {
-    
+    const tmpLogin = this.ctx.request.body
+    const sql = " SELECT username FROM user WHERE username = '" + tmpLogin.username + "' AND password = '" + tmpLogin.password + "'"
+    const res = await this.app.mysql.query(sql)
+    if (res.length > 0) {
+      const openId = new Date().getTime()
+      this.ctx.session.openId = {openId}
+      this.ctx.body = {isSuccess: true, openId}
+    } else {
+      this.ctx.body = {isSuccess: false}
+    }
   }
 }
 

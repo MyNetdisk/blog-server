@@ -11,4 +11,5 @@ module.exports = app => {
   router.post('/default/addComment', controller.default.home.addComment)
   router.get('/default/isRegister/:username', controller.default.home.isRegister)
   router.post('/default/register', controller.default.home.register)
+  router.post('/default/login', controller.default.home.login)
 }
