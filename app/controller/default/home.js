@@ -15,7 +15,10 @@ class HomeController extends Controller {
       'posts.title as title,' +
       'posts.introduce as introduce,' +
       'FROM_UNIXTIME(posts.addTime,"%Y-%m-%d %H:%i:%s") as addTime,' +
+      'FROM_UNIXTIME(posts.update_date,"%Y-%m-%d %H:%i:%s") as update_date,' +
       'posts.view_count as view_count,' +
+      'posts.cover_image as cover_image,' +
+      'posts.label as label,' +
       'types.typeName as typeName ' +
       'FROM posts LEFT JOIN types ON posts.type_id=types.id'
     const res = await this.app.mysql.query(sql)
@@ -30,7 +33,9 @@ class HomeController extends Controller {
       'posts.introduce as introduce,' +
       'posts.article_content as article_content,' +
       'FROM_UNIXTIME(posts.addTime,"%Y-%m-%d %H:%i:%s") as addTime,' +
+      'FROM_UNIXTIME(posts.update_date,"%Y-%m-%d %H:%i:%s") as update_date,' +
       'posts.view_count as view_count,' +
+      'posts.label as label,' +
       'types.typeName as typeName ' +
       'FROM posts LEFT JOIN types ON posts.type_id=types.id ' +
       'WHERE posts.id=' +
