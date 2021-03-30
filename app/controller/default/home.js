@@ -48,6 +48,13 @@ class HomeController extends Controller {
     const res = await this.app.mysql.select('types')
     this.ctx.body = {data: res}
   }
+  // 得到格言phrase
+  async getPhrase() {
+    const res = await this.app.mysql.select('phrase', {
+      columns: ['hitokoto'],
+    })
+    this.ctx.body = {data: res}
+  }
   // 根据类型ID获得文章列表
   async getListById() {
     const id = this.ctx.params.id
@@ -63,6 +70,16 @@ class HomeController extends Controller {
       id
     const res = await this.app.mysql.query(sql)
     this.ctx.body = {data: res}
+  }
+  // 根据文章日期升序查询文章
+  async getTimeline() {
+    const sql =
+      'SELECT posts.id as id,' +
+      'posts.title as title,' +
+      'FROM_UNIXTIME(posts.addTime,"%Y-%m-%d") as addTime ' +
+      'FROM posts order by addTime desc'
+      const res = await this.app.mysql.query(sql)
+      this.ctx.body = {data: res}
   }
   // 根据文章ID获得文章评论列表
   async getCommentById() {
@@ -125,7 +142,12 @@ class HomeController extends Controller {
   // 添加登录接口
   async login() {
     const tmpLogin = this.ctx.request.body
-    const sql = " SELECT username FROM user WHERE username = '" + tmpLogin.username + "' AND password = '" + tmpLogin.password + "'"
+    const sql =
+      " SELECT username FROM user WHERE username = '" +
+      tmpLogin.username +
+      "' AND password = '" +
+      tmpLogin.password +
+      "'"
     const res = await this.app.mysql.query(sql)
     if (res.length > 0) {
       const openId = new Date().getTime()
