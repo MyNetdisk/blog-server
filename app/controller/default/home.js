@@ -78,8 +78,45 @@ class HomeController extends Controller {
       'posts.title as title,' +
       'FROM_UNIXTIME(posts.addTime,"%Y-%m-%d") as addTime ' +
       'FROM posts order by addTime desc'
-      const res = await this.app.mysql.query(sql)
-      this.ctx.body = {data: res}
+    const res = await this.app.mysql.query(sql)
+    this.ctx.body = {data: res}
+  }
+  // 获取网站信息
+  async getSiteinfo() {
+    const res = await this.app.mysql.select('siteinfo')
+    this.ctx.body = {data: res}
+  }
+  // 获取标签
+  async getTags() {
+    const res = await this.app.mysql.select('label', {
+      columns: ['id', 'name', 'out_color'],
+    })
+    this.ctx.body = {data: res}
+  }
+  // 获取分类
+  async getCategory() {
+    const sql =
+      'select posts.title,posts.Id as posts_id,types.typeName,types.Id as types_id from posts left join types on posts.type_id=types.Id'
+    const res = await this.app.mysql.query(sql)
+    const mainCate = []
+    const obj = {}
+    res.reduce((prev, elem) => {
+      obj[elem.types_id] ? "" : obj[elem.types_id] = true && prev.push({
+        typeName:elem.typeName,
+        types_id:elem.types_id
+      })
+      return prev
+    }, []).forEach((element1)=>{
+      element1["subCate"]=[]
+      res.filter(function (elem) {
+        return elem.types_id === element1.types_id
+      })
+      .forEach(element => {
+        element1['subCate'].push({post_id: element.posts_id, title: element.title})
+      })
+      mainCate.push(element1)
+    })
+    this.ctx.body = {data: mainCate}
   }
   // 根据文章ID获得文章评论列表
   async getCommentById() {
