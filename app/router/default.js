@@ -12,6 +12,7 @@ module.exports = app => {
   router.get('/default/getTimeline', controller.default.home.getTimeline)
   router.get('/default/getSiteinfo', controller.default.home.getSiteinfo)
   router.get('/default/getTags', controller.default.home.getTags)
+  router.get('/default/getAdminInfo', controller.default.home.getAdminInfo)
   router.get('/default/getCommentById/:id', controller.default.home.getCommentById)
   router.post('/default/addComment', controller.default.home.addComment)
   router.get('/default/isRegister/:username', controller.default.home.isRegister)

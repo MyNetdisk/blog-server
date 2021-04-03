@@ -118,6 +118,12 @@ class HomeController extends Controller {
     })
     this.ctx.body = {data: mainCate}
   }
+  // 获取网站管理员信息
+  async getAdminInfo(){
+    const sql = `SELECT admin_user.Id as id,admin_user.avatar,admin_user.userName as username,admin_user.introduction,role.name FROM admin_user LEFT JOIN role ON admin_user.role=role.value WHERE admin_user.role='ROLE_ADMIN'`
+    const res = await this.app.mysql.query(sql)
+    this.ctx.body = {data: res}
+  }
   // 根据文章ID获得文章评论列表
   async getCommentById() {
     const id = this.ctx.params.id
