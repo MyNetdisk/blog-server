@@ -48,7 +48,7 @@ class HomeController extends Controller {
       'SELECT posts.id as id,' +
       'posts.title as title,' +
       'posts.introduce as introduce,' +
-      'FROM_UNIXTIME(posts.addTime,"%Y-%m-%d %H:%i:%s") as addTime,' +
+      'DATE_FORMAT(posts.addTime,"%Y-%m-%d %H:%i:%s") as addTime,' +
       'posts.view_count as view_count,' +
       'types.typeName as typeName ' +
       'FROM posts LEFT JOIN types ON posts.type_id=types.id ' +
@@ -67,7 +67,7 @@ class HomeController extends Controller {
       'SELECT posts.id as id,' +
       'posts.title as title,' +
       'posts.introduce as introduce,' +
-      'FROM_UNIXTIME(posts.addTime,"%Y-%m-%d") as addTime,' +
+      'DATE_FORMAT(posts.addTime,"%Y-%m-%d") as addTime,' +
       'posts.view_count as view_count,' +
       'posts.article_content as article_content,' +
       'types.typeName as typeName,' +

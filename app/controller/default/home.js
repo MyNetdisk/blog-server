@@ -14,8 +14,8 @@ class HomeController extends Controller {
       'SELECT posts.id as id,' +
       'posts.title as title,' +
       'posts.introduce as introduce,' +
-      'FROM_UNIXTIME(posts.addTime,"%Y-%m-%d %H:%i:%s") as addTime,' +
-      'FROM_UNIXTIME(posts.update_date,"%Y-%m-%d %H:%i:%s") as update_date,' +
+      'DATE_FORMAT(posts.addTime,"%Y-%m-%d %H:%i:%s") as addTime,' +
+      'DATE_FORMAT(posts.update_date,"%Y-%m-%d %H:%i:%s") as update_date,' +
       'posts.view_count as view_count,' +
       'posts.cover_image as cover_image,' +
       'posts.label as label,' +
@@ -32,8 +32,8 @@ class HomeController extends Controller {
       'posts.title as title,' +
       'posts.introduce as introduce,' +
       'posts.article_content as article_content,' +
-      'FROM_UNIXTIME(posts.addTime,"%Y-%m-%d %H:%i:%s") as addTime,' +
-      'FROM_UNIXTIME(posts.update_date,"%Y-%m-%d %H:%i:%s") as update_date,' +
+      'DATE_FORMAT(posts.addTime,"%Y-%m-%d %H:%i:%s") as addTime,' +
+      'DATE_FORMAT(posts.update_date,"%Y-%m-%d %H:%i:%s") as update_date,' +
       'posts.view_count as view_count,' +
       'posts.label as label,' +
       'types.typeName as typeName ' +
@@ -62,7 +62,7 @@ class HomeController extends Controller {
       'SELECT posts.id as id,' +
       'posts.title as title,' +
       'posts.introduce as introduce,' +
-      'FROM_UNIXTIME(posts.addTime,"%Y-%m-%d %H:%i:%s") as addTime,' +
+      'DATE_FORMAT(posts.addTime,"%Y-%m-%d %H:%i:%s") as addTime,' +
       'posts.view_count as view_count,' +
       'types.typeName as typeName ' +
       'FROM posts LEFT JOIN types ON posts.type_id=types.id ' +
@@ -76,7 +76,7 @@ class HomeController extends Controller {
     const sql =
       'SELECT posts.id as id,' +
       'posts.title as title,' +
-      'FROM_UNIXTIME(posts.addTime,"%Y-%m-%d") as addTime ' +
+      'DATE_FORMAT(posts.addTime,"%Y-%m-%d") as addTime ' +
       'FROM posts order by addTime desc'
     const res = await this.app.mysql.query(sql)
     this.ctx.body = {data: res}
